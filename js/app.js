@@ -160,11 +160,15 @@
     }
 
     document.title = v.name || s.title || '视频';
-    $('video-name').textContent = v.name || '视频';
+    // 配置里设了标题就用标题当大标题(文件名常常是一串哈希,直接当标题很难看),
+    // 没设标题才退回用文件名
+    var heading = s.titleIsCustom ? s.title : (v.name || '视频');
+    $('video-name').textContent = heading;
     setMeta([
       v.sizeText,
       v.ext ? v.ext.replace('.', '').toUpperCase() + ' 格式' : null,
       v.mtimeMs ? '更新于 ' + formatTime(v.mtimeMs) : null,
+      (s.titleIsCustom && v.name) ? v.name : null,
       s.mode === 'url' ? '外部直链托管,不占用本站带宽' : null
     ]);
 
