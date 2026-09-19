@@ -8,6 +8,9 @@
   var lastHasVideo = null;
   var lastStatus = null;
   var baseMeta = '';
+  // 静态导出时 index.html 会设这个变量,指向同目录的 status.json。
+  // 静态托管下配置不会变,所以只加载一次、不轮询。
+  var STATIC_MODE = !!window.__STATUS_URL__;
 
   /**
    * 取站点状态。
@@ -260,9 +263,11 @@
 
     renderShare(s);
 
-    // 没有视频时勤快点查(方便丢完文件马上看到),有视频后放慢
+    // 静态托管下配置不会变,不用轮询;
+    // 本地服务模式下勤快点查(丢完文件 / 改完配置马上能看到)
+    if (STATIC_MODE) return;
     clearTimeout(timer);
-    timer = setTimeout(poll, s.hasVideo ? 20000 : 4000);
+    timer = setTimeout(poll, s.hasVideo ? 5000 : 2000);
   }
 
   /* ------------------------------------------------------------ 交互 */
