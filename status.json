@@ -1,0 +1,28 @@
+{
+  "title": "Charlie Puth & Selena Gomez - We Don't Talk Anymore [Official Live Performance]",
+  "subtitle": "",
+  "mode": "embed",
+  "url": null,
+  "embed": "https://www.youtube.com/embed/i_yLpCLMaKk",
+  "origin": "https://www.youtube.com/watch?v=i_yLpCLMaKk",
+  "platform": "youtube",
+  "misconfigured": null,
+  "hasVideo": true,
+  "video": {
+    "name": "YouTube 视频",
+    "size": null,
+    "sizeText": null,
+    "mtimeMs": null,
+    "ext": "",
+    "mime": "",
+    "playable": true,
+    "external": true
+  },
+  "streamUrl": "/stream",
+  "downloadUrl": "/download",
+  "publicUrl": null,
+  "lanUrls": [],
+  "tailscaleUrls": [],
+  "isLocal": false,
+  "videoDir": null
+}

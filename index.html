@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>视频</title>
+<meta name="description" content="一个只放一个视频的网页。">
+<meta name="theme-color" content="#0a0b0f">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88'>🎬</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <span class="brand"><span class="brand-dot"></span><span id="site-title">视频</span></span>
+    <span class="subtitle" id="site-subtitle"></span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 播放器 -->
+  <section id="player-view" class="hidden">
+    <div class="stage">
+      <video id="video" controls playsinline preload="metadata" controlslist="nodownload"></video>
+      <iframe id="embed" class="hidden" title="视频播放器" frameborder="0" scrolling="no"
+              allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <div class="meta-bar">
+      <div class="meta-text">
+        <h1 id="video-name">—</h1>
+        <p class="muted small" id="video-meta"></p>
+      </div>
+      <div class="actions">
+        <a class="btn" id="download-btn" href="/download" download>下载</a>
+        <a class="btn hidden" id="origin-btn" href="#" target="_blank" rel="noopener">去原站看</a>
+        <button class="btn" type="button" id="copy-stream">复制播放链接</button>
+        <button class="btn" type="button" id="fullscreen">全屏</button>
+      </div>
+    </div>
+
+    <div id="format-warning" class="notice notice-warn hidden"></div>
+  </section>
+
+  <!-- 还没有视频 -->
+  <section id="empty-view" class="hidden">
+    <div class="empty-card">
+      <div class="empty-icon">📼</div>
+      <h1>还没有视频</h1>
+      <p class="lead" id="empty-lead">三种方式任选其一,推荐后两种 —— 视频由平台或对象存储提供,不占用本机带宽。</p>
+
+      <div class="path-box" id="path-box">
+        <code id="video-dir">videos/</code>
+        <button class="btn btn-sm" type="button" id="copy-dir">复制路径</button>
+      </div>
+
+      <ul class="tips">
+        <li><b>① 本地文件</b> —— 把视频放进上面的目录,刷新本页即可,不用重启服务。<br>
+          适合:局域网观看、本机带宽充裕(服务器 / 家宽)。</li>
+        <li><b>② 外部直链(推荐)</b> —— 视频放到对象存储或 CDN,用直链播放。<br>
+          <code>VIDEO_URL=https://你的存储/视频.mp4 npm start</code><br>
+          适合:本机上行带宽小(校园网、4G),观众要秒开和流畅拖动。</li>
+        <li><b>③ 平台嵌入(最省事)</b> —— 直接把 B 站 / YouTube 的分享链接交给它。<br>
+          <code>VIDEO_PAGE=https://www.bilibili.com/video/BV1xx411c7mD npm start</code><br>
+          适合:视频本来就要发到平台,顺便当播放源。</li>
+      </ul>
+
+      <p class="muted small" style="margin-top:22px">
+        为什么推荐 ②③:如果本站跑在带宽很小的网络上,页面几 KB 能秒开,
+        但自己往外发视频会卡到不可用。把视频交给带宽充裕的地方托管,网站只做外壳最快。
+      </p>
+    </div>
+  </section>
+
+  <!-- 分享 -->
+  <section class="card share">
+    <h2>在其他设备上打开</h2>
+    <div id="share-body" class="share-body">
+      <p class="muted small">正在检测可用地址…</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="muted small">零依赖 Node.js 站点 · 支持 Range 断点续传,拖动进度条无需重新加载</p>
+  </div>
+</footer>
+
+<div id="toast-area"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
