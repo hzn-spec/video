@@ -134,7 +134,18 @@
       } else {
         origin.classList.add('hidden');
       }
-      $('format-warning').classList.add('hidden');
+
+      /*
+        清晰度提示:平台嵌入的清晰度不由我们决定。
+        B 站 / YouTube 都按"观众是否登录"给不同码率,未登录通常只有 480P/360P,
+        即使视频源本身是 1080P。这件事配置改不了,只能如实告诉观众出路在哪。
+      */
+      var warn = $('format-warning');
+      warn.classList.remove('hidden');
+      warn.innerHTML =
+        '清晰度由' + (s.platform === 'bilibili' ? ' B 站' : s.platform ? ' ' + escapeHtml(s.platform) : '平台') +
+        '按「观众是否登录」决定 —— 未登录时通常只给到 480P / 360P,即使原片是高清。' +
+        (s.origin ? '想要原画请点上面的「去原站看」。' : '');
       return;
     }
 
